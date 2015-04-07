@@ -1,0 +1,49 @@
+
+      Read of User
+      
+      <table id="Userdatatable" class="table table-striped">
+        <thead>
+          
+          <td>
+            UserName
+          </td>
+          
+          <td>
+            FirstName
+          </td>
+          
+          <td>
+            LastName
+          </td>
+          
+          <td></td>
+        </thead>
+
+        <tbody>
+      {{^data}}
+       <tr>
+          <td colspan="4">No records</td>
+        </tr>
+      {{/data}}
+      {{#data}}
+        <tr rowid='{{id}}'>
+          
+          <td>
+            {{UserName}}
+          </td>
+          
+          <td>
+            {{FirstName}}
+          </td>
+          
+          <td>
+            {{LastName}}
+          </td>
+          
+          <td>
+      </td>
+        </tr>
+       {{/data}}
+        </tbody>
+      </table>
+    

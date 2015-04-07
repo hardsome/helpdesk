@@ -1,0 +1,75 @@
+
+{{#data}}<div id='AttachmentDeleteContainer' >
+      <p class='bg-danger'> Are you sure you want to delete this Attachment? </p>
+      <form id="DeleteAttachment" method="post" role="form">
+      <div class="form-group">
+      <label for='Attachmentid'>id</label>
+      {{id}}<input id='Attachmentid' name='Attachmentid' type='hidden' value='{{id}}' />
+      </div>
+
+
+      
+        <div class="form-group">
+        <label for="AttachmentName">AttachmentName</label>
+        <p id='AttachmentName' class='form-control-static'> {{AttachmentName}}<p>
+        </div>
+      
+        <div class="form-group">
+        <label for="Incident">Incident</label>
+        <p id='Incident' class='form-control-static'> {{Incident}}<p>
+        </div>
+      
+        <div class="form-group">
+        <label for="Creator">Creator</label>
+        <p id='Creator' class='form-control-static'> {{Creator}}<p>
+        </div>
+      
+        <div class="form-group">
+        <label for="Content">Content</label>
+        <p id='Content' class='form-control-static'> {{Content}}<p>
+        </div>
+      
+        <div class="form-group">
+        <label for="MimeType">MimeType</label>
+        <p id='MimeType' class='form-control-static'> {{MimeType}}<p>
+        </div>
+      
+        <button type="submit" class="btn btn-danger">Submit</button>
+      </form>
+
+      <script type="text/javascript">
+      $(document).ready();
+      
+  AttachmentDeleteModule = (function() {
+		// private 
+      var SubmittingAttachmentDeleteForm = function() {
+	        var args = {id: $('#AttachmentDeleteContainer #Attachmentid').val()};
+	        //make an AJAX call
+          //controllers['Attachment']['DeletePost'](null, args);
+          AttachmentController.DeletePost(args);
+	    }
+
+		//public
+		return {
+			bindEvents : function() {
+          $('#DeleteAttachment').submit(function( event ) {
+            //alert( "Handler for .submit() called." );
+            SubmittingAttachmentDeleteForm();
+            event.preventDefault();
+            });
+      }
+		}//end public members
+	})();  //end AttachmentDeleteModule
+
+
+	$(document).ready(function() {
+		AttachmentDeleteModule.bindEvents();
+	});
+      
+</script>
+
+</div>{{/data}}
+{{^data}}
+      expected a model:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}      
+    

@@ -1,0 +1,31 @@
+
+      {{#data}}<div id='PriorityDetailsContainer'>
+      <form id="DetailsPriority" role="form">
+      <div class="form-group">
+      <label for='Priorityid'>id</label>
+      {{id}}<input id='Priorityid' name='Priorityid' type='hidden' value='{{id}}' />
+      </div>
+      
+        <div class="form-group">
+        <label for="PriorityName">PriorityName</label>
+        <span id='PriorityName' class='form-control'> {{PriorityName}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="CSSClass">CSSClass</label>
+        <span id='CSSClass' class='form-control'> {{CSSClass}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="SortOrder">SortOrder</label>
+        <span id='SortOrder' class='form-control'> {{SortOrder}}<span>
+        </div>
+      
+      </form>
+
+      </div>{{/data}}
+{{^data}}
+      Details on Priority
+      expected a model:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}      
+    

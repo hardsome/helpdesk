@@ -1,0 +1,49 @@
+
+      Read of Project
+      
+      <table id="Projectdatatable" class="table table-striped">
+        <thead>
+          
+          <td>
+            ProjectName
+          </td>
+          
+          <td>
+            POP3Address
+          </td>
+          
+          <td>
+            isActive
+          </td>
+          
+          <td></td>
+        </thead>
+
+        <tbody>
+      {{^data}}
+       <tr>
+          <td colspan="4">No records</td>
+        </tr>
+      {{/data}}
+      {{#data}}
+        <tr rowid='{{id}}'>
+          
+          <td>
+            {{ProjectName}}
+          </td>
+          
+          <td>
+            {{POP3Address}}
+          </td>
+          
+          <td>
+            {{isActive}}
+          </td>
+          
+          <td>
+      </td>
+        </tr>
+       {{/data}}
+        </tbody>
+      </table>
+    

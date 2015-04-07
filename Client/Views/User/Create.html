@@ -1,0 +1,90 @@
+
+
+      {{#data}}<div id='UserCreateContainer'>
+      <form id="CreateUser" method="post" role="form">
+      <div class="form-group">
+      <label for='Userid'>id</label>
+      <input id='Userid' name='Userid' type='hidden' value='{{id}}' />
+      </div>
+
+      
+        <div class="form-group">
+        <label for="UserName">UserName</label>
+        
+                  <input id='UserName' name='UserName' type='text' value='{{UserName}}' class='form-control' />
+                  <!--String-->
+                
+        </div>
+      
+        <div class="form-group">
+        <label for="FirstName">FirstName</label>
+        
+                  <input id='FirstName' name='FirstName' type='text' value='{{FirstName}}' class='form-control' />
+                  <!--String-->
+                
+        </div>
+      
+        <div class="form-group">
+        <label for="LastName">LastName</label>
+        
+                  <input id='LastName' name='LastName' type='text' value='{{LastName}}' class='form-control' />
+                  <!--String-->
+                
+        </div>
+      
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+
+        <script type="text/javascript">
+  UserCreateModule = (function() {
+		// private 
+	    var SubmittingUserCreateForm = function() {
+	        //alert("The form has been validated. Now send the form...");
+	        //make an AJAX call
+	        //e.preventDefault();
+	            var args = {id: $('#UserCreateContainer #Userid').val(),
+                  UserName: $('#UserCreateContainer #UserName').val() ,
+                  FirstName: $('#UserCreateContainer #FirstName').val() ,
+                  LastName: $('#UserCreateContainer #LastName').val() 
+	            };
+	        //call Controller/Action eaither via controllers or directly
+          //controllers['User']['CreatePost'](null, args);
+          UserController.CreatePost(args);
+	    };
+
+		//public
+		return {
+			bindEvents : function() {
+           $('#CreateUser').validate({
+                submitHandler: function(form) {
+                   SubmittingUserCreateForm();
+                   return false;
+                },
+                rules: {
+                    UserName: {required: false, maxlength:200},
+                    FirstName: {required: false, maxlength:200},
+                    LastName: {required: false, maxlength:200}
+                },
+                messages: {
+                    UserName: "the field UserName is not required,maxlength is 200",
+                    FirstName: "the field FirstName is not required,maxlength is 200",
+                    LastName: "the field LastName is not required,maxlength is 200"
+                }
+           });
+           
+       }
+		}//end public members
+	})();  //end UserCreateModule
+
+
+	$(document).ready(function() {
+		UserCreateModule.bindEvents();
+	});
+</script>
+</div>{{/data}}      
+{{^data}}
+      Create User
+      expected a model like:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}
+
+    

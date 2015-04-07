@@ -1,0 +1,97 @@
+
+      Read of Incident
+      
+      <table id="Incidentdatatable" class="table table-striped">
+        <thead>
+          
+          <td>
+            IncidentName
+          </td>
+          
+          <td>
+            ProjectID
+          </td>
+          
+          <td>
+            StatusID
+          </td>
+          
+          <td>
+            PriorityID
+          </td>
+          
+          <td>
+            CategoryID
+          </td>
+          
+          <td>
+            Description
+          </td>
+          
+          <td>
+            ReportedDate
+          </td>
+          
+          <td>
+            UpdatedDate
+          </td>
+          
+          <td>
+            UserID
+          </td>
+          
+          <td></td>
+        </thead>
+
+        <tbody>
+      {{^data}}
+       <tr>
+          <td colspan="4">No records</td>
+        </tr>
+      {{/data}}
+      {{#data}}
+        <tr rowid='{{id}}'>
+          
+          <td>
+            {{IncidentName}}
+          </td>
+          
+          <td>
+            {{ProjectID}}
+          </td>
+          
+          <td>
+            {{StatusID}}
+          </td>
+          
+          <td>
+            {{PriorityID}}
+          </td>
+          
+          <td>
+            {{CategoryID}}
+          </td>
+          
+          <td>
+            {{Description}}
+          </td>
+          
+          <td>
+            {{ReportedDate}}
+          </td>
+          
+          <td>
+            {{UpdatedDate}}
+          </td>
+          
+          <td>
+            {{UserID}}
+          </td>
+          
+          <td>
+      </td>
+        </tr>
+       {{/data}}
+        </tbody>
+      </table>
+    

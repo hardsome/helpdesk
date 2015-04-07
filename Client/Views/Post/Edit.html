@@ -1,0 +1,136 @@
+
+{{#data}}<div id='PostEditContainer'>
+      <form id="EditPost" method="post" role="form" >
+      <div class="form-group">
+      <label for='Postid'>id</label>
+      {{id}}<input id='Postid' name='Postid' type='hidden' value='{{id}}' /> 
+      </div>
+
+      
+            <div class="form-group">
+            <label for="PostName">PostName</label>
+
+              
+                  <input id='PostName' name='PostName' type='text' class='form-control' value='{{PostName}}'  />
+                  <!--String-->
+                
+            </div>
+            
+            <div class="form-group">
+            <label for="IncidentID">IncidentID</label>
+
+              
+                    <select id='IncidentID' name='IncidentID' class='form-control'>
+                     <option value="">-- Select One --</option>
+                      {{#IncidentID}}<option value='{{IncidentID}}' selected> {{IncidentID}}</option>
+                      {{/IncidentID}}
+                    </select>
+                
+            </div>
+            
+            <div class="form-group">
+            <label for="FromUser">FromUser</label>
+
+              
+                    <select id='FromUser' name='FromUser' class='form-control'>
+                     <option value="">-- Select One --</option>
+                      {{#FromUser}}<option value='{{FromUser}}' selected> {{FromUser}}</option>
+                      {{/FromUser}}
+                    </select>
+                
+            </div>
+            
+            <div class="form-group">
+            <label for="ToUser">ToUser</label>
+
+              
+                    <select id='ToUser' name='ToUser' class='form-control'>
+                     <option value="">-- Select One --</option>
+                      {{#ToUser}}<option value='{{ToUser}}' selected> {{ToUser}}</option>
+                      {{/ToUser}}
+                    </select>
+                
+            </div>
+            
+            <div class="form-group">
+            <label for="PostedDate">PostedDate</label>
+
+              
+                  <input id='PostedDate' name='PostedDate' type='text' class='form-control' value='{{PostedDate}}'  />
+                  <!--Date-->
+                
+            </div>
+            
+            <div class="form-group">
+            <label for="Desctiption">Desctiption</label>
+
+              
+                  <textarea id='Desctiption' name='Desctiption' cols='60' rows='15' class='form-control'>{{Desctiption}}</textarea>
+              
+            </div>
+            
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+
+        <script type="text/javascript">
+      
+			PostEditModule = (function() {
+				  // private 
+	        var SubmittingPostEditForm = function() {
+	            //alert("The form has been validated. Now send the form...");
+	            //make an AJAX call
+	            var args = {id: $('#PostEditContainer #Postid').val(),
+                  PostName: $('#PostEditContainer #PostName').val() ,
+                  IncidentID: $('#PostEditContainer #IncidentID').val() ,
+                  FromUser: $('#PostEditContainer #FromUser').val() ,
+                  ToUser: $('#PostEditContainer #ToUser').val() ,
+                  PostedDate: $('#PostEditContainer #PostedDate').val() ,
+                  Desctiption: $('#PostEditContainer #Desctiption').val() 
+	            };
+	            //call the server-side Controller/Action either via controllers or directly
+              //controllers['Post']['EditPost'](null, args);
+              PostController.EditPost(args);
+	        };
+
+          //public
+				  return {
+              bindEvents : function() {
+                 $('#EditPost').validate({
+                     submitHandler: function(form) {
+                         SubmittingPostEditForm();
+                         return false;
+                     },
+                     rules: {
+                         PostName: {required: false, maxlength:200},
+                         IncidentID: {required: false},
+                         FromUser: {required: false},
+                         ToUser: {required: false},
+                         PostedDate: {required: false, maxlength:200},
+                         Desctiption: {required: false, maxlength:4000}
+                     },
+                     messages: {
+                         PostName: "the field PostName is not required,maxlength is 200",
+                         IncidentID: "the field IncidentID is not required,integer",
+                         FromUser: "the field FromUser is not required,integer",
+                         ToUser: "the field ToUser is not required,integer",
+                         PostedDate: "the field PostedDate is not required,maxlength is 200",
+                         Desctiption: "the field Desctiption is not required,maxlength is 4000"
+                     }
+                 });
+        $("#PostedDate").datepicker();
+              }
+				  }//end public members
+      })();  //end PostEditModule
+
+
+      $(document).ready(function() {
+          PostEditModule.bindEvents();
+      });      
+      
+</script>
+</div>{{/data}} 
+{{^data}}
+      Edit Post
+      expected a model:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}      
+    

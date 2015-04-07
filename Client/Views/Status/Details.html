@@ -1,0 +1,36 @@
+
+      {{#data}}<div id='StatusDetailsContainer'>
+      <form id="DetailsStatus" role="form">
+      <div class="form-group">
+      <label for='Statusid'>id</label>
+      {{id}}<input id='Statusid' name='Statusid' type='hidden' value='{{id}}' />
+      </div>
+      
+        <div class="form-group">
+        <label for="StatusName">StatusName</label>
+        <span id='StatusName' class='form-control'> {{StatusName}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="SortOrder">SortOrder</label>
+        <span id='SortOrder' class='form-control'> {{SortOrder}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="CSSClass">CSSClass</label>
+        <span id='CSSClass' class='form-control'> {{CSSClass}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="isDefault">isDefault</label>
+        <span id='isDefault' class='form-control'> {{isDefault}}<span>
+        </div>
+      
+      </form>
+
+      </div>{{/data}}
+{{^data}}
+      Details on Status
+      expected a model:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}      
+    

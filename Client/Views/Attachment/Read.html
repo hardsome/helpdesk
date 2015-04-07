@@ -1,0 +1,65 @@
+
+      Read of Attachment
+      
+      <table id="Attachmentdatatable" class="table table-striped">
+        <thead>
+          
+          <td>
+            AttachmentName
+          </td>
+          
+          <td>
+            Incident
+          </td>
+          
+          <td>
+            Creator
+          </td>
+          
+          <td>
+            Content
+          </td>
+          
+          <td>
+            MimeType
+          </td>
+          
+          <td></td>
+        </thead>
+
+        <tbody>
+      {{^data}}
+       <tr>
+          <td colspan="4">No records</td>
+        </tr>
+      {{/data}}
+      {{#data}}
+        <tr rowid='{{id}}'>
+          
+          <td>
+            {{AttachmentName}}
+          </td>
+          
+          <td>
+            {{Incident}}
+          </td>
+          
+          <td>
+            {{Creator}}
+          </td>
+          
+          <td>
+            {{Content}}
+          </td>
+          
+          <td>
+            {{MimeType}}
+          </td>
+          
+          <td>
+      </td>
+        </tr>
+       {{/data}}
+        </tbody>
+      </table>
+    

@@ -1,0 +1,92 @@
+
+{{#data}}<div id='UserEditContainer'>
+      <form id="EditUser" method="post" role="form" >
+      <div class="form-group">
+      <label for='Userid'>id</label>
+      {{id}}<input id='Userid' name='Userid' type='hidden' value='{{id}}' /> 
+      </div>
+
+      
+            <div class="form-group">
+            <label for="UserName">UserName</label>
+
+              
+                  <input id='UserName' name='UserName' type='text' class='form-control' value='{{UserName}}'  />
+                  <!--String-->
+                
+            </div>
+            
+            <div class="form-group">
+            <label for="FirstName">FirstName</label>
+
+              
+                  <input id='FirstName' name='FirstName' type='text' class='form-control' value='{{FirstName}}'  />
+                  <!--String-->
+                
+            </div>
+            
+            <div class="form-group">
+            <label for="LastName">LastName</label>
+
+              
+                  <input id='LastName' name='LastName' type='text' class='form-control' value='{{LastName}}'  />
+                  <!--String-->
+                
+            </div>
+            
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+
+        <script type="text/javascript">
+      
+			UserEditModule = (function() {
+				  // private 
+	        var SubmittingUserEditForm = function() {
+	            //alert("The form has been validated. Now send the form...");
+	            //make an AJAX call
+	            var args = {id: $('#UserEditContainer #Userid').val(),
+                  UserName: $('#UserEditContainer #UserName').val() ,
+                  FirstName: $('#UserEditContainer #FirstName').val() ,
+                  LastName: $('#UserEditContainer #LastName').val() 
+	            };
+	            //call the server-side Controller/Action either via controllers or directly
+              //controllers['User']['EditPost'](null, args);
+              UserController.EditPost(args);
+	        };
+
+          //public
+				  return {
+              bindEvents : function() {
+                 $('#EditUser').validate({
+                     submitHandler: function(form) {
+                         SubmittingUserEditForm();
+                         return false;
+                     },
+                     rules: {
+                         UserName: {required: false, maxlength:200},
+                         FirstName: {required: false, maxlength:200},
+                         LastName: {required: false, maxlength:200}
+                     },
+                     messages: {
+                         UserName: "the field UserName is not required,maxlength is 200",
+                         FirstName: "the field FirstName is not required,maxlength is 200",
+                         LastName: "the field LastName is not required,maxlength is 200"
+                     }
+                 });
+        
+              }
+				  }//end public members
+      })();  //end UserEditModule
+
+
+      $(document).ready(function() {
+          UserEditModule.bindEvents();
+      });      
+      
+</script>
+</div>{{/data}} 
+{{^data}}
+      Edit User
+      expected a model:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}      
+    

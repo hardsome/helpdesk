@@ -1,0 +1,70 @@
+
+{{#data}}<div id='StatusDeleteContainer' >
+      <p class='bg-danger'> Are you sure you want to delete this Status? </p>
+      <form id="DeleteStatus" method="post" role="form">
+      <div class="form-group">
+      <label for='Statusid'>id</label>
+      {{id}}<input id='Statusid' name='Statusid' type='hidden' value='{{id}}' />
+      </div>
+
+
+      
+        <div class="form-group">
+        <label for="StatusName">StatusName</label>
+        <p id='StatusName' class='form-control-static'> {{StatusName}}<p>
+        </div>
+      
+        <div class="form-group">
+        <label for="SortOrder">SortOrder</label>
+        <p id='SortOrder' class='form-control-static'> {{SortOrder}}<p>
+        </div>
+      
+        <div class="form-group">
+        <label for="CSSClass">CSSClass</label>
+        <p id='CSSClass' class='form-control-static'> {{CSSClass}}<p>
+        </div>
+      
+        <div class="form-group">
+        <label for="isDefault">isDefault</label>
+        <p id='isDefault' class='form-control-static'> {{isDefault}}<p>
+        </div>
+      
+        <button type="submit" class="btn btn-danger">Submit</button>
+      </form>
+
+      <script type="text/javascript">
+      $(document).ready();
+      
+  StatusDeleteModule = (function() {
+		// private 
+      var SubmittingStatusDeleteForm = function() {
+	        var args = {id: $('#StatusDeleteContainer #Statusid').val()};
+	        //make an AJAX call
+          //controllers['Status']['DeletePost'](null, args);
+          StatusController.DeletePost(args);
+	    }
+
+		//public
+		return {
+			bindEvents : function() {
+          $('#DeleteStatus').submit(function( event ) {
+            //alert( "Handler for .submit() called." );
+            SubmittingStatusDeleteForm();
+            event.preventDefault();
+            });
+      }
+		}//end public members
+	})();  //end StatusDeleteModule
+
+
+	$(document).ready(function() {
+		StatusDeleteModule.bindEvents();
+	});
+      
+</script>
+
+</div>{{/data}}
+{{^data}}
+      expected a model:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}      
+    

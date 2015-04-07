@@ -1,0 +1,90 @@
+
+
+      {{#data}}<div id='PriorityCreateContainer'>
+      <form id="CreatePriority" method="post" role="form">
+      <div class="form-group">
+      <label for='Priorityid'>id</label>
+      <input id='Priorityid' name='Priorityid' type='hidden' value='{{id}}' />
+      </div>
+
+      
+        <div class="form-group">
+        <label for="PriorityName">PriorityName</label>
+        
+                  <input id='PriorityName' name='PriorityName' type='text' value='{{PriorityName}}' class='form-control' />
+                  <!--String-->
+                
+        </div>
+      
+        <div class="form-group">
+        <label for="CSSClass">CSSClass</label>
+        
+                  <input id='CSSClass' name='CSSClass' type='text' value='{{CSSClass}}' class='form-control' />
+                  <!--String-->
+                
+        </div>
+      
+        <div class="form-group">
+        <label for="SortOrder">SortOrder</label>
+        
+                  <input id='SortOrder' name='SortOrder' type='text' value='{{SortOrder}}' class='form-control' />
+                  <!--Integer-->
+                
+        </div>
+      
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+
+        <script type="text/javascript">
+  PriorityCreateModule = (function() {
+		// private 
+	    var SubmittingPriorityCreateForm = function() {
+	        //alert("The form has been validated. Now send the form...");
+	        //make an AJAX call
+	        //e.preventDefault();
+	            var args = {id: $('#PriorityCreateContainer #Priorityid').val(),
+                  PriorityName: $('#PriorityCreateContainer #PriorityName').val() ,
+                  CSSClass: $('#PriorityCreateContainer #CSSClass').val() ,
+                  SortOrder: $('#PriorityCreateContainer #SortOrder').val() 
+	            };
+	        //call Controller/Action eaither via controllers or directly
+          //controllers['Priority']['CreatePost'](null, args);
+          PriorityController.CreatePost(args);
+	    };
+
+		//public
+		return {
+			bindEvents : function() {
+           $('#CreatePriority').validate({
+                submitHandler: function(form) {
+                   SubmittingPriorityCreateForm();
+                   return false;
+                },
+                rules: {
+                    PriorityName: {required: false, maxlength:200},
+                    CSSClass: {required: false, maxlength:200},
+                    SortOrder: {required: false, digit: true}
+                },
+                messages: {
+                    PriorityName: "the field PriorityName is not required,maxlength is 200",
+                    CSSClass: "the field CSSClass is not required,maxlength is 200",
+                    SortOrder: "the field SortOrder is not required,integer"
+                }
+           });
+           
+       }
+		}//end public members
+	})();  //end PriorityCreateModule
+
+
+	$(document).ready(function() {
+		PriorityCreateModule.bindEvents();
+	});
+</script>
+</div>{{/data}}      
+{{^data}}
+      Create Priority
+      expected a model like:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}
+
+    

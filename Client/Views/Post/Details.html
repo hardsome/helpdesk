@@ -1,0 +1,46 @@
+
+      {{#data}}<div id='PostDetailsContainer'>
+      <form id="DetailsPost" role="form">
+      <div class="form-group">
+      <label for='Postid'>id</label>
+      {{id}}<input id='Postid' name='Postid' type='hidden' value='{{id}}' />
+      </div>
+      
+        <div class="form-group">
+        <label for="PostName">PostName</label>
+        <span id='PostName' class='form-control'> {{PostName}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="IncidentID">IncidentID</label>
+        <span id='IncidentID' class='form-control'> {{IncidentID}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="FromUser">FromUser</label>
+        <span id='FromUser' class='form-control'> {{FromUser}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="ToUser">ToUser</label>
+        <span id='ToUser' class='form-control'> {{ToUser}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="PostedDate">PostedDate</label>
+        <span id='PostedDate' class='form-control'> {{PostedDate}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="Desctiption">Desctiption</label>
+        <span id='Desctiption' class='form-control'> {{Desctiption}}<span>
+        </div>
+      
+      </form>
+
+      </div>{{/data}}
+{{^data}}
+      Details on Post
+      expected a model:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}      
+    

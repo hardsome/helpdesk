@@ -1,0 +1,94 @@
+
+
+      {{#data}}<div id='ProjectCreateContainer'>
+      <form id="CreateProject" method="post" role="form">
+      <div class="form-group">
+      <label for='Projectid'>id</label>
+      <input id='Projectid' name='Projectid' type='hidden' value='{{id}}' />
+      </div>
+
+      
+        <div class="form-group">
+        <label for="ProjectName">ProjectName</label>
+        
+                  <input id='ProjectName' name='ProjectName' type='text' value='{{ProjectName}}' class='form-control' />
+                  <!--String-->
+                
+        </div>
+      
+        <div class="form-group">
+        <label for="POP3Address">POP3Address</label>
+        
+                  <input id='POP3Address' name='POP3Address' type='text' value='{{POP3Address}}' class='form-control' />
+                  <!--String-->
+                
+        </div>
+      
+        <div class="form-group">
+        <label for="isActive">isActive</label>
+        
+                  {{#isActive}}
+                    <input type='checkbox' id='isActive' name='isActive'   checked  />
+                  {{/isActive}}
+                  {{^isActive}}
+                    <input type='checkbox' id='isActive' name='isActive'   />
+                  {{/isActive}}
+                
+        </div>
+      
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+
+        <script type="text/javascript">
+  ProjectCreateModule = (function() {
+		// private 
+	    var SubmittingProjectCreateForm = function() {
+	        //alert("The form has been validated. Now send the form...");
+	        //make an AJAX call
+	        //e.preventDefault();
+	            var args = {id: $('#ProjectCreateContainer #Projectid').val(),
+                  ProjectName: $('#ProjectCreateContainer #ProjectName').val() ,
+                  POP3Address: $('#ProjectCreateContainer #POP3Address').val() ,
+                  isActive:($('#ProjectCreateContainer #isActive').is(':checked')) ? "on" : ""
+	            };
+	        //call Controller/Action eaither via controllers or directly
+          //controllers['Project']['CreatePost'](null, args);
+          ProjectController.CreatePost(args);
+	    };
+
+		//public
+		return {
+			bindEvents : function() {
+           $('#CreateProject').validate({
+                submitHandler: function(form) {
+                   SubmittingProjectCreateForm();
+                   return false;
+                },
+                rules: {
+                    ProjectName: {required: false, maxlength:200},
+                    POP3Address: {required: false, maxlength:200},
+                    isActive: {required: false, maxlength:1}
+                },
+                messages: {
+                    ProjectName: "the field ProjectName is not required,maxlength is 200",
+                    POP3Address: "the field POP3Address is not required,maxlength is 200",
+                    isActive: "the field isActive is not required,check no more than 1 box"
+                }
+           });
+           
+       }
+		}//end public members
+	})();  //end ProjectCreateModule
+
+
+	$(document).ready(function() {
+		ProjectCreateModule.bindEvents();
+	});
+</script>
+</div>{{/data}}      
+{{^data}}
+      Create Project
+      expected a model like:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}
+
+    

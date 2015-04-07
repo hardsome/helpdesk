@@ -1,0 +1,26 @@
+
+      {{#data}}<div id='CategoryDetailsContainer'>
+      <form id="DetailsCategory" role="form">
+      <div class="form-group">
+      <label for='Categoryid'>id</label>
+      {{id}}<input id='Categoryid' name='Categoryid' type='hidden' value='{{id}}' />
+      </div>
+      
+        <div class="form-group">
+        <label for="CategoryName">CategoryName</label>
+        <span id='CategoryName' class='form-control'> {{CategoryName}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="SortOrder">SortOrder</label>
+        <span id='SortOrder' class='form-control'> {{SortOrder}}<span>
+        </div>
+      
+      </form>
+
+      </div>{{/data}}
+{{^data}}
+      Details on Category
+      expected a model:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}      
+    

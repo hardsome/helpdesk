@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>helpdesk</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="content description" />
+    <meta name="author" content="" />
+    <link href="Client/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="Client/Content/css/style.css" rel="stylesheet" />
+    <link href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+      
+      
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="Client/lib/html5shiv.js"></script>
+    <![endif]-->
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="Content/img/apple-touch-icon-144-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="Content/img/apple-touch-icon-114-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="Content/img/apple-touch-icon-72-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" href="Content/img/apple-touch-icon-57-precomposed.png" />
+    <link rel="shortcut icon" href="Client/Content/img/favicon.png" />
+
+    <!--script type="text/javascript" src="Client/lib/jquery.min.js"></script-->
+    <script type="text/javascript" src="Client/lib/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="Client/lib/jquery-ui.js"></script>
+    <script type="text/javascript" src="Client/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="Client/lib/mustache.js"></script>
+    <script type="text/javascript" src="Client/lib/jquery.ba-hashchange.js"></script>
+    <script type="text/javascript" src="Client/lib/jquery.validate.js"></script>
+    <script type="text/javascript" src="Client/lib/misc.js"></script>
+    <script type="text/javascript" src="Client/lib/validator.js"></script>
+    <script type="text/javascript" src="Client/lib/require.js"></script>
+    <script type="text/javascript" src="Client/router.js"></script>
+    <script type="text/javascript" src="Client/Controllers/Home.js"></script>
+    <script type="text/javascript" src="Client/Controllers/ProjectController.js"></script>
+    <script type="text/javascript" src="Client/Controllers/UserController.js"></script>
+    <script type="text/javascript" src="Client/Controllers/StatusController.js"></script>
+    <script type="text/javascript" src="Client/Controllers/PriorityController.js"></script>
+    <script type="text/javascript" src="Client/Controllers/CategoryController.js"></script>
+    <script type="text/javascript" src="Client/Controllers/IncidentController.js"></script>
+    <script type="text/javascript" src="Client/Controllers/PostController.js"></script>
+    <script type="text/javascript" src="Client/Controllers/AttachmentController.js"></script>
+    
+    <script type="text/javascript" src="Client/Views/CordovaViewProxy.js"></script>
+    <script type="text/javascript" src="Client/Model/DB.js"></script>
+    <script type="text/javascript" src="Client/Model/ProjectModel.js"></script>
+    <script type="text/javascript" src="Client/Model/UserModel.js"></script>
+    <script type="text/javascript" src="Client/Model/StatusModel.js"></script>
+    <script type="text/javascript" src="Client/Model/PriorityModel.js"></script>
+    <script type="text/javascript" src="Client/Model/CategoryModel.js"></script>
+    <script type="text/javascript" src="Client/Model/IncidentModel.js"></script>
+    <script type="text/javascript" src="Client/Model/PostModel.js"></script>
+    <script type="text/javascript" src="Client/Model/AttachmentModel.js"></script>
+    
+
+</head>
+<body>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <nav class="navbar navbar-default navbar-inverse" role="navigation">
+				<div class="navbar-header">
+					 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					  <span class="sr-only">Toggle navigation</span>
+					  <span class="icon-bar"></span>
+					  <span class="icon-bar"></span>
+					  <span class="icon-bar"></span>
+					  </button> 
+					 <a class="navbar-brand" href="#">helpdesk</a>
+				</div>
+<!-- menu -->				
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+<! -- menu is inserted here from HomeController.GetMenu() -->					
+					</ul>
+					<form class="navbar-form navbar-left hidden" role="search">
+						<div class="form-group">
+							<input type="text" class="form-control">
+						</div> <button type="submit" class="btn btn-default">Search</button>
+					</form>
+				</div>
+			</nav>
+<!-- main content goes here -->			
+                <div id="mainBlock" class="jumbotron panel-collapse collapse in">
+                <a  data-toggle="collapse" href="#mainBlock" class="close">×</a>
+                    <h2> Some content  </h2>
+                        <p>
+                            Main block text
+                            </br> <a id="modal-415092" href="some call to action link"
+                                role="button" class="btn btn-primary btn-lg" data-toggle="modal">Go
+                                »</a>
+                        </p>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--modal dialogs-->
+    <div class="modal fade" id="dialog1" role="dialog" aria-labelledby="dialog1-label"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×</button> 
+                    <h4 class="modal-title" id="dialog1-label">
+                        
+                    </h4>
+                </div>
+                <div id="dialog1-body" class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="dialog2" role="dialog" aria-labelledby="dialog2-label"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×</button>
+                    <h4 class="modal-title" id="dialog2-label">
+                        
+                    </h4>
+                </div>
+                <div id="dialog2-body" class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="dialog3" role="dialog" aria-labelledby="dialog3-label"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×</button>
+                    <h4 class="modal-title" id="dialog3-label">
+                        
+                    </h4>
+                </div>
+                <div id="dialog3-body" class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/modal dialogs-->
+</body>
+<script type="text/javascript">
+      $(document).ready(function() {
+          //support cross domain requests
+          $.support.cors = true;
+
+          //load menu when controllers are linked statically
+          HomeController.GetMenu();
+
+          /* dynamically load controllers and then trigger the menu load
+          require([
+           baseurl + 'Client/Controllers/Project.js', baseurl + 'Client/Controllers/User.js', baseurl + 'Client/Controllers/Status.js', baseurl + 'Client/Controllers/Priority.js', baseurl + 'Client/Controllers/Category.js', baseurl + 'Client/Controllers/Incident.js', baseurl + 'Client/Controllers/Post.js', baseurl + 'Client/Controllers/Attachment.js'	
+                ],
+                function(util) {
+                    HomeController.GetMenu();
+                });
+          */
+       });
+</script>
+</html>
+    

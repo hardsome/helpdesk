@@ -1,0 +1,105 @@
+
+
+      {{#data}}<div id='StatusCreateContainer'>
+      <form id="CreateStatus" method="post" role="form">
+      <div class="form-group">
+      <label for='Statusid'>id</label>
+      <input id='Statusid' name='Statusid' type='hidden' value='{{id}}' />
+      </div>
+
+      
+        <div class="form-group">
+        <label for="StatusName">StatusName</label>
+        
+                  <input id='StatusName' name='StatusName' type='text' value='{{StatusName}}' class='form-control' />
+                  <!--String-->
+                
+        </div>
+      
+        <div class="form-group">
+        <label for="SortOrder">SortOrder</label>
+        
+                  <input id='SortOrder' name='SortOrder' type='text' value='{{SortOrder}}' class='form-control' />
+                  <!--Integer-->
+                
+        </div>
+      
+        <div class="form-group">
+        <label for="CSSClass">CSSClass</label>
+        
+                  <input id='CSSClass' name='CSSClass' type='text' value='{{CSSClass}}' class='form-control' />
+                  <!--String-->
+                
+        </div>
+      
+        <div class="form-group">
+        <label for="isDefault">isDefault</label>
+        
+                  {{#isDefault}}
+                    <input type='checkbox' id='isDefault' name='isDefault'   checked  />
+                  {{/isDefault}}
+                  {{^isDefault}}
+                    <input type='checkbox' id='isDefault' name='isDefault'   />
+                  {{/isDefault}}
+                
+        </div>
+      
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+
+        <script type="text/javascript">
+  StatusCreateModule = (function() {
+		// private 
+	    var SubmittingStatusCreateForm = function() {
+	        //alert("The form has been validated. Now send the form...");
+	        //make an AJAX call
+	        //e.preventDefault();
+	            var args = {id: $('#StatusCreateContainer #Statusid').val(),
+                  StatusName: $('#StatusCreateContainer #StatusName').val() ,
+                  SortOrder: $('#StatusCreateContainer #SortOrder').val() ,
+                  CSSClass: $('#StatusCreateContainer #CSSClass').val() ,
+                  isDefault:($('#StatusCreateContainer #isDefault').is(':checked')) ? "on" : ""
+	            };
+	        //call Controller/Action eaither via controllers or directly
+          //controllers['Status']['CreatePost'](null, args);
+          StatusController.CreatePost(args);
+	    };
+
+		//public
+		return {
+			bindEvents : function() {
+           $('#CreateStatus').validate({
+                submitHandler: function(form) {
+                   SubmittingStatusCreateForm();
+                   return false;
+                },
+                rules: {
+                    StatusName: {required: false, maxlength:200},
+                    SortOrder: {required: false, digit: true},
+                    CSSClass: {required: false, maxlength:200},
+                    isDefault: {required: false, maxlength:1}
+                },
+                messages: {
+                    StatusName: "the field StatusName is not required,maxlength is 200",
+                    SortOrder: "the field SortOrder is not required,integer",
+                    CSSClass: "the field CSSClass is not required,maxlength is 200",
+                    isDefault: "the field isDefault is not required,check no more than 1 box"
+                }
+           });
+           
+       }
+		}//end public members
+	})();  //end StatusCreateModule
+
+
+	$(document).ready(function() {
+		StatusCreateModule.bindEvents();
+	});
+</script>
+</div>{{/data}}      
+{{^data}}
+      Create Status
+      expected a model like:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}
+
+    

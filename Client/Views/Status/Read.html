@@ -1,0 +1,57 @@
+
+      Read of Status
+      
+      <table id="Statusdatatable" class="table table-striped">
+        <thead>
+          
+          <td>
+            StatusName
+          </td>
+          
+          <td>
+            SortOrder
+          </td>
+          
+          <td>
+            CSSClass
+          </td>
+          
+          <td>
+            isDefault
+          </td>
+          
+          <td></td>
+        </thead>
+
+        <tbody>
+      {{^data}}
+       <tr>
+          <td colspan="4">No records</td>
+        </tr>
+      {{/data}}
+      {{#data}}
+        <tr rowid='{{id}}'>
+          
+          <td>
+            {{StatusName}}
+          </td>
+          
+          <td>
+            {{SortOrder}}
+          </td>
+          
+          <td>
+            {{CSSClass}}
+          </td>
+          
+          <td>
+            {{isDefault}}
+          </td>
+          
+          <td>
+      </td>
+        </tr>
+       {{/data}}
+        </tbody>
+      </table>
+    

@@ -1,0 +1,80 @@
+
+{{#data}}<div id='CategoryEditContainer'>
+      <form id="EditCategory" method="post" role="form" >
+      <div class="form-group">
+      <label for='Categoryid'>id</label>
+      {{id}}<input id='Categoryid' name='Categoryid' type='hidden' value='{{id}}' /> 
+      </div>
+
+      
+            <div class="form-group">
+            <label for="CategoryName">CategoryName</label>
+
+              
+                  <input id='CategoryName' name='CategoryName' type='text' class='form-control' value='{{CategoryName}}'  />
+                  <!--String-->
+                
+            </div>
+            
+            <div class="form-group">
+            <label for="SortOrder">SortOrder</label>
+
+              
+                  <input id='SortOrder' name='SortOrder' type='text' class='form-control' value='{{SortOrder}}'  />
+                  <!--Integer-->
+                
+            </div>
+            
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+
+        <script type="text/javascript">
+      
+			CategoryEditModule = (function() {
+				  // private 
+	        var SubmittingCategoryEditForm = function() {
+	            //alert("The form has been validated. Now send the form...");
+	            //make an AJAX call
+	            var args = {id: $('#CategoryEditContainer #Categoryid').val(),
+                  CategoryName: $('#CategoryEditContainer #CategoryName').val() ,
+                  SortOrder: $('#CategoryEditContainer #SortOrder').val() 
+	            };
+	            //call the server-side Controller/Action either via controllers or directly
+              //controllers['Category']['EditPost'](null, args);
+              CategoryController.EditPost(args);
+	        };
+
+          //public
+				  return {
+              bindEvents : function() {
+                 $('#EditCategory').validate({
+                     submitHandler: function(form) {
+                         SubmittingCategoryEditForm();
+                         return false;
+                     },
+                     rules: {
+                         CategoryName: {required: false, maxlength:200},
+                         SortOrder: {required: false, digit: true}
+                     },
+                     messages: {
+                         CategoryName: "the field CategoryName is not required,maxlength is 200",
+                         SortOrder: "the field SortOrder is not required,integer"
+                     }
+                 });
+        
+              }
+				  }//end public members
+      })();  //end CategoryEditModule
+
+
+      $(document).ready(function() {
+          CategoryEditModule.bindEvents();
+      });      
+      
+</script>
+</div>{{/data}} 
+{{^data}}
+      Edit Category
+      expected a model:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}      
+    

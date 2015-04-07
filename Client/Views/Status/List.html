@@ -1,0 +1,85 @@
+{{#.}}<div id='StatusListContainer'>
+      <ul class="pagination pagination-sm  pull-right"><li><a class="btn" href='#/Status/About'>?</a></li></ul>
+      <ul class="pagination pagination-sm">
+          <li><a id="create_button" href="#/Status/Create" class="btn"><span class="glyphicon glyphicon-file" /> </a> </li>
+          <li class="button_container" style="display: none;" > <a id="edit_button" class="btn"><span class="glyphicon glyphicon-edit" /> </a> </li>
+          <li class="button_container" style="display: none;" ><a id="delete_button" class="btn"><span class="glyphicon glyphicon-remove" /> </a> </li>
+          <li class="button_container" style="display: none;" ><a id="details_button" class="btn"><span class="glyphicon glyphicon-zoom-in" /> </a> </li>
+      </ul>
+      {{#data}}{{#paginator}}
+      <div  >
+       <ul class="pagination pagination-sm">
+          <li><a href="#/Status/List/{{first}}"><span class="glyphicon glyphicon-backward" /></a></li>
+          {{#previous}}<li><a href="#/Status/List/{{previous}}"><span class="glyphicon glyphicon-chevron-left" /></a></li>{{/previous}}
+             {{#links}}
+                <li><a href="#/Status/List/{{n}}"{{#c}}class="selected"{{/c}}>{{n}}</a></li>
+              {{/links}}
+          {{#next}}<li><a href="#/Status/List/{{next}}"><span class="glyphicon glyphicon-chevron-right" /></a></li>{{/next}}
+          <li><a href="#/Status/List/{{last}}"><span class="glyphicon glyphicon-forward" /></a></li>          
+       </ul> 
+      </div>
+      {{/paginator}}{{/data}}
+      <table id="Statusdatatable" class="table table-striped">
+        <thead>
+          <tr><td>StatusName</td><td>SortOrder</td><td>CSSClass</td><td>isDefault</td><td></td></tr>
+        </thead>
+        <tbody>
+      {{#data}}{{#items}}
+      <tr rowid='{{id}}'>
+          <td>{{StatusName}}</td><td>{{SortOrder}}</td><td>{{CSSClass}}</td>{{#isDefault}}<td>Y</td>{{/isDefault}}	{{^isDefault}}<td>N</td>{{/isDefault}}
+          <td></td>
+        </tr>
+      {{/items}} {{/data}}
+      </tbody>
+      </table>
+      
+      {{#data}}{{^items}}
+      <div>No records</div>
+      {{/items}}{{/data}}
+      <script type="text/javascript">
+          StatusListModule = (function() {
+              // private 
+              var onSelectorClick = function(_selector) {
+                  if ($(_selector).hasClass('active')) {
+                      $(_selector).removeClass('active');
+                      disableButtons();
+                  }
+                  else {
+                      $(_selector).addClass('active').siblings().removeClass('active');
+                      $(_selector).find("tr").addClass('active');
+                      var rID = $(_selector).attr('rowid');
+                      enableButtons(rID);
+                  }
+              };
+              var enableButtons = function(id) {
+                  $("div#StatusListContainer li.button_container").fadeIn(100);
+                  $("div#StatusListContainer #edit_button")[0].href = '#/Status/Edit/' + String(id);
+                  $("div#StatusListContainer #delete_button")[0].href = '#/Status/Delete/' + String(id);
+                  $("div#StatusListContainer #details_button")[0].href = '#/Status/Details/' + String(id);
+              };
+              var disableButtons = function() {
+                  $("div#StatusListContainer li.button_container").fadeOut(100);
+                  $("div#StatusListContainer #edit_button")[0].href = '#';
+                  $("div#StatusListContainer #delete_button")[0].href = '#';
+                  $("div#StatusListContainer #details_button")[0].href = '#';
+              };
+              var bindEvents = function() {
+                  $("div#StatusListContainer  #Statusdatatable > tbody tr").each(function() {
+                      $(this).unbind();
+                      $(this).bind('click', function() {
+                          onSelectorClick(this);
+                      });
+                  });
+              };
+              //public
+              return {
+                  bindEvents : bindEvents ,
+                  disableButtons : disableButtons
+
+              }//end public members
+          })();  //end StatusListModule
+      $(document).ready(function() {
+          StatusListModule.bindEvents();
+      });
+      </script>
+      </div>{{/.}}

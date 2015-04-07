@@ -1,0 +1,61 @@
+
+      {{#data}}<div id='IncidentDetailsContainer'>
+      <form id="DetailsIncident" role="form">
+      <div class="form-group">
+      <label for='Incidentid'>id</label>
+      {{id}}<input id='Incidentid' name='Incidentid' type='hidden' value='{{id}}' />
+      </div>
+      
+        <div class="form-group">
+        <label for="IncidentName">IncidentName</label>
+        <span id='IncidentName' class='form-control'> {{IncidentName}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="ProjectID">ProjectID</label>
+        <span id='ProjectID' class='form-control'> {{ProjectID}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="StatusID">StatusID</label>
+        <span id='StatusID' class='form-control'> {{StatusID}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="PriorityID">PriorityID</label>
+        <span id='PriorityID' class='form-control'> {{PriorityID}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="CategoryID">CategoryID</label>
+        <span id='CategoryID' class='form-control'> {{CategoryID}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="Description">Description</label>
+        <span id='Description' class='form-control'> {{Description}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="ReportedDate">ReportedDate</label>
+        <span id='ReportedDate' class='form-control'> {{ReportedDate}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="UpdatedDate">UpdatedDate</label>
+        <span id='UpdatedDate' class='form-control'> {{UpdatedDate}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="UserID">UserID</label>
+        <span id='UserID' class='form-control'> {{UserID}}<span>
+        </div>
+      
+      </form>
+
+      </div>{{/data}}
+{{^data}}
+      Details on Incident
+      expected a model:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}      
+    

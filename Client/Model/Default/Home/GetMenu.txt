@@ -1,0 +1,6 @@
+
+      {"data":[
+            {"link":"#/Project/List","linktext":"Project"},{"link":"#/User/List","linktext":"User"},{"link":"#/Status/List","linktext":"Status"},{"link":"#/Priority/List","linktext":"Priority"},{"link":"#/Category/List","linktext":"Category"},{"link":"#/Incident/List","linktext":"Incident"},{"link":"#/Post/List","linktext":"Post"},{"link":"#/Attachment/List","linktext":"Attachment"},
+            {"link":"#/Home/ClearCache","linktext":"Clear cache"}
+      ]}
+    

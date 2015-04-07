@@ -1,0 +1,80 @@
+
+{{#data}}<div id='PostDeleteContainer' >
+      <p class='bg-danger'> Are you sure you want to delete this Post? </p>
+      <form id="DeletePost" method="post" role="form">
+      <div class="form-group">
+      <label for='Postid'>id</label>
+      {{id}}<input id='Postid' name='Postid' type='hidden' value='{{id}}' />
+      </div>
+
+
+      
+        <div class="form-group">
+        <label for="PostName">PostName</label>
+        <p id='PostName' class='form-control-static'> {{PostName}}<p>
+        </div>
+      
+        <div class="form-group">
+        <label for="IncidentID">IncidentID</label>
+        <p id='IncidentID' class='form-control-static'> {{IncidentID}}<p>
+        </div>
+      
+        <div class="form-group">
+        <label for="FromUser">FromUser</label>
+        <p id='FromUser' class='form-control-static'> {{FromUser}}<p>
+        </div>
+      
+        <div class="form-group">
+        <label for="ToUser">ToUser</label>
+        <p id='ToUser' class='form-control-static'> {{ToUser}}<p>
+        </div>
+      
+        <div class="form-group">
+        <label for="PostedDate">PostedDate</label>
+        <p id='PostedDate' class='form-control-static'> {{PostedDate}}<p>
+        </div>
+      
+        <div class="form-group">
+        <label for="Desctiption">Desctiption</label>
+        <p id='Desctiption' class='form-control-static'> {{Desctiption}}<p>
+        </div>
+      
+        <button type="submit" class="btn btn-danger">Submit</button>
+      </form>
+
+      <script type="text/javascript">
+      $(document).ready();
+      
+  PostDeleteModule = (function() {
+		// private 
+      var SubmittingPostDeleteForm = function() {
+	        var args = {id: $('#PostDeleteContainer #Postid').val()};
+	        //make an AJAX call
+          //controllers['Post']['DeletePost'](null, args);
+          PostController.DeletePost(args);
+	    }
+
+		//public
+		return {
+			bindEvents : function() {
+          $('#DeletePost').submit(function( event ) {
+            //alert( "Handler for .submit() called." );
+            SubmittingPostDeleteForm();
+            event.preventDefault();
+            });
+      }
+		}//end public members
+	})();  //end PostDeleteModule
+
+
+	$(document).ready(function() {
+		PostDeleteModule.bindEvents();
+	});
+      
+</script>
+
+</div>{{/data}}
+{{^data}}
+      expected a model:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}      
+    

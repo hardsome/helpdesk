@@ -1,0 +1,41 @@
+
+      {{#data}}<div id='AttachmentDetailsContainer'>
+      <form id="DetailsAttachment" role="form">
+      <div class="form-group">
+      <label for='Attachmentid'>id</label>
+      {{id}}<input id='Attachmentid' name='Attachmentid' type='hidden' value='{{id}}' />
+      </div>
+      
+        <div class="form-group">
+        <label for="AttachmentName">AttachmentName</label>
+        <span id='AttachmentName' class='form-control'> {{AttachmentName}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="Incident">Incident</label>
+        <span id='Incident' class='form-control'> {{Incident}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="Creator">Creator</label>
+        <span id='Creator' class='form-control'> {{Creator}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="Content">Content</label>
+        <span id='Content' class='form-control'> {{Content}}<span>
+        </div>
+      
+        <div class="form-group">
+        <label for="MimeType">MimeType</label>
+        <span id='MimeType' class='form-control'> {{MimeType}}<span>
+        </div>
+      
+      </form>
+
+      </div>{{/data}}
+{{^data}}
+      Details on Attachment
+      expected a model:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}      
+    

@@ -1,0 +1,73 @@
+
+      Read of Post
+      
+      <table id="Postdatatable" class="table table-striped">
+        <thead>
+          
+          <td>
+            PostName
+          </td>
+          
+          <td>
+            IncidentID
+          </td>
+          
+          <td>
+            FromUser
+          </td>
+          
+          <td>
+            ToUser
+          </td>
+          
+          <td>
+            PostedDate
+          </td>
+          
+          <td>
+            Desctiption
+          </td>
+          
+          <td></td>
+        </thead>
+
+        <tbody>
+      {{^data}}
+       <tr>
+          <td colspan="4">No records</td>
+        </tr>
+      {{/data}}
+      {{#data}}
+        <tr rowid='{{id}}'>
+          
+          <td>
+            {{PostName}}
+          </td>
+          
+          <td>
+            {{IncidentID}}
+          </td>
+          
+          <td>
+            {{FromUser}}
+          </td>
+          
+          <td>
+            {{ToUser}}
+          </td>
+          
+          <td>
+            {{PostedDate}}
+          </td>
+          
+          <td>
+            {{Desctiption}}
+          </td>
+          
+          <td>
+      </td>
+        </tr>
+       {{/data}}
+        </tbody>
+      </table>
+    

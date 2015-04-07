@@ -1,0 +1,117 @@
+
+
+      {{#data}}<div id='AttachmentCreateContainer'>
+      <form id="CreateAttachment" method="post" role="form">
+      <div class="form-group">
+      <label for='Attachmentid'>id</label>
+      <input id='Attachmentid' name='Attachmentid' type='hidden' value='{{id}}' />
+      </div>
+
+      
+        <div class="form-group">
+        <label for="AttachmentName">AttachmentName</label>
+        
+                  <input id='AttachmentName' name='AttachmentName' type='text' value='{{AttachmentName}}' class='form-control' />
+                  <!--String-->
+                
+        </div>
+      
+        <div class="form-group">
+        <label for="Incident">Incident</label>
+        
+                    <select id='Incident' name='Incident' class='form-control'>
+                     <option value="">-- Select One --</option>
+                  {{#Incident}}<option value='{{Incident}}' selected> {{Incident}}</option>
+                  {{/Incident}}
+                    </select>
+                
+        </div>
+      
+        <div class="form-group">
+        <label for="Creator">Creator</label>
+        
+                    <select id='Creator' name='Creator' class='form-control'>
+                     <option value="">-- Select One --</option>
+                  {{#Creator}}<option value='{{Creator}}' selected> {{Creator}}</option>
+                  {{/Creator}}
+                    </select>
+                
+        </div>
+      
+        <div class="form-group">
+        <label for="Content">Content</label>
+        
+                  <textarea id='Content' name='Content' cols='60' rows='15' class='form-control'>{{Content}}</textarea>
+              
+        </div>
+      
+        <div class="form-group">
+        <label for="MimeType">MimeType</label>
+        
+                  <input id='MimeType' name='MimeType' type='text' value='{{MimeType}}' class='form-control' />
+                  <!--String-->
+                
+        </div>
+      
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+
+        <script type="text/javascript">
+  AttachmentCreateModule = (function() {
+		// private 
+	    var SubmittingAttachmentCreateForm = function() {
+	        //alert("The form has been validated. Now send the form...");
+	        //make an AJAX call
+	        //e.preventDefault();
+	            var args = {id: $('#AttachmentCreateContainer #Attachmentid').val(),
+                  AttachmentName: $('#AttachmentCreateContainer #AttachmentName').val() ,
+                  Incident: $('#AttachmentCreateContainer #Incident').val() ,
+                  Creator: $('#AttachmentCreateContainer #Creator').val() ,
+                  Content: $('#AttachmentCreateContainer #Content').val() ,
+                  MimeType: $('#AttachmentCreateContainer #MimeType').val() 
+	            };
+	        //call Controller/Action eaither via controllers or directly
+          //controllers['Attachment']['CreatePost'](null, args);
+          AttachmentController.CreatePost(args);
+	    };
+
+		//public
+		return {
+			bindEvents : function() {
+           $('#CreateAttachment').validate({
+                submitHandler: function(form) {
+                   SubmittingAttachmentCreateForm();
+                   return false;
+                },
+                rules: {
+                    AttachmentName: {required: false, maxlength:200},
+                    Incident: {required: false},
+                    Creator: {required: false},
+                    Content: {required: false, maxlength:4000},
+                    MimeType: {required: false, maxlength:200}
+                },
+                messages: {
+                    AttachmentName: "the field AttachmentName is not required,maxlength is 200",
+                    Incident: "the field Incident is not required,integer",
+                    Creator: "the field Creator is not required,integer",
+                    Content: "the field Content is not required,maxlength is 4000",
+                    MimeType: "the field MimeType is not required,maxlength is 200"
+                }
+           });
+           
+       }
+		}//end public members
+	})();  //end AttachmentCreateModule
+
+
+	$(document).ready(function() {
+		AttachmentCreateModule.bindEvents();
+	});
+</script>
+</div>{{/data}}      
+{{^data}}
+      Create Attachment
+      expected a model like:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}
+
+    

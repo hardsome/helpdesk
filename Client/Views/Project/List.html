@@ -1,0 +1,85 @@
+{{#.}}<div id='ProjectListContainer'>
+      <ul class="pagination pagination-sm  pull-right"><li><a class="btn" href='#/Project/About'>?</a></li></ul>
+      <ul class="pagination pagination-sm">
+          <li><a id="create_button" href="#/Project/Create" class="btn"><span class="glyphicon glyphicon-file" /> </a> </li>
+          <li class="button_container" style="display: none;" > <a id="edit_button" class="btn"><span class="glyphicon glyphicon-edit" /> </a> </li>
+          <li class="button_container" style="display: none;" ><a id="delete_button" class="btn"><span class="glyphicon glyphicon-remove" /> </a> </li>
+          <li class="button_container" style="display: none;" ><a id="details_button" class="btn"><span class="glyphicon glyphicon-zoom-in" /> </a> </li>
+      </ul>
+      {{#data}}{{#paginator}}
+      <div  >
+       <ul class="pagination pagination-sm">
+          <li><a href="#/Project/List/{{first}}"><span class="glyphicon glyphicon-backward" /></a></li>
+          {{#previous}}<li><a href="#/Project/List/{{previous}}"><span class="glyphicon glyphicon-chevron-left" /></a></li>{{/previous}}
+             {{#links}}
+                <li><a href="#/Project/List/{{n}}"{{#c}}class="selected"{{/c}}>{{n}}</a></li>
+              {{/links}}
+          {{#next}}<li><a href="#/Project/List/{{next}}"><span class="glyphicon glyphicon-chevron-right" /></a></li>{{/next}}
+          <li><a href="#/Project/List/{{last}}"><span class="glyphicon glyphicon-forward" /></a></li>          
+       </ul> 
+      </div>
+      {{/paginator}}{{/data}}
+      <table id="Projectdatatable" class="table table-striped">
+        <thead>
+          <tr><td>ProjectName</td><td>POP3Address</td><td>isActive</td><td></td></tr>
+        </thead>
+        <tbody>
+      {{#data}}{{#items}}
+      <tr rowid='{{id}}'>
+          <td>{{ProjectName}}</td><td>{{POP3Address}}</td>{{#isActive}}<td>Y</td>{{/isActive}}	{{^isActive}}<td>N</td>{{/isActive}}
+          <td></td>
+        </tr>
+      {{/items}} {{/data}}
+      </tbody>
+      </table>
+      
+      {{#data}}{{^items}}
+      <div>No records</div>
+      {{/items}}{{/data}}
+      <script type="text/javascript">
+          ProjectListModule = (function() {
+              // private 
+              var onSelectorClick = function(_selector) {
+                  if ($(_selector).hasClass('active')) {
+                      $(_selector).removeClass('active');
+                      disableButtons();
+                  }
+                  else {
+                      $(_selector).addClass('active').siblings().removeClass('active');
+                      $(_selector).find("tr").addClass('active');
+                      var rID = $(_selector).attr('rowid');
+                      enableButtons(rID);
+                  }
+              };
+              var enableButtons = function(id) {
+                  $("div#ProjectListContainer li.button_container").fadeIn(100);
+                  $("div#ProjectListContainer #edit_button")[0].href = '#/Project/Edit/' + String(id);
+                  $("div#ProjectListContainer #delete_button")[0].href = '#/Project/Delete/' + String(id);
+                  $("div#ProjectListContainer #details_button")[0].href = '#/Project/Details/' + String(id);
+              };
+              var disableButtons = function() {
+                  $("div#ProjectListContainer li.button_container").fadeOut(100);
+                  $("div#ProjectListContainer #edit_button")[0].href = '#';
+                  $("div#ProjectListContainer #delete_button")[0].href = '#';
+                  $("div#ProjectListContainer #details_button")[0].href = '#';
+              };
+              var bindEvents = function() {
+                  $("div#ProjectListContainer  #Projectdatatable > tbody tr").each(function() {
+                      $(this).unbind();
+                      $(this).bind('click', function() {
+                          onSelectorClick(this);
+                      });
+                  });
+              };
+              //public
+              return {
+                  bindEvents : bindEvents ,
+                  disableButtons : disableButtons
+
+              }//end public members
+          })();  //end ProjectListModule
+      $(document).ready(function() {
+          ProjectListModule.bindEvents();
+      });
+      </script>
+      </div>{{/.}}

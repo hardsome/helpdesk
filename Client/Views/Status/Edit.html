@@ -1,0 +1,108 @@
+
+{{#data}}<div id='StatusEditContainer'>
+      <form id="EditStatus" method="post" role="form" >
+      <div class="form-group">
+      <label for='Statusid'>id</label>
+      {{id}}<input id='Statusid' name='Statusid' type='hidden' value='{{id}}' /> 
+      </div>
+
+      
+            <div class="form-group">
+            <label for="StatusName">StatusName</label>
+
+              
+                  <input id='StatusName' name='StatusName' type='text' class='form-control' value='{{StatusName}}'  />
+                  <!--String-->
+                
+            </div>
+            
+            <div class="form-group">
+            <label for="SortOrder">SortOrder</label>
+
+              
+                  <input id='SortOrder' name='SortOrder' type='text' class='form-control' value='{{SortOrder}}'  />
+                  <!--Integer-->
+                
+            </div>
+            
+            <div class="form-group">
+            <label for="CSSClass">CSSClass</label>
+
+              
+                  <input id='CSSClass' name='CSSClass' type='text' class='form-control' value='{{CSSClass}}'  />
+                  <!--String-->
+                
+            </div>
+            
+            <div class="form-group">
+            <label for="isDefault">isDefault</label>
+
+              
+                  {{#isDefault}}
+                    <input type='checkbox' id='isDefault' name='isDefault'   checked  />
+                  {{/isDefault}}
+                  {{^isDefault}}
+                    <input type='checkbox' id='isDefault' name='isDefault'   />
+                  {{/isDefault}}
+                
+            </div>
+            
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+
+        <script type="text/javascript">
+      
+			StatusEditModule = (function() {
+				  // private 
+	        var SubmittingStatusEditForm = function() {
+	            //alert("The form has been validated. Now send the form...");
+	            //make an AJAX call
+	            var args = {id: $('#StatusEditContainer #Statusid').val(),
+                  StatusName: $('#StatusEditContainer #StatusName').val() ,
+                  SortOrder: $('#StatusEditContainer #SortOrder').val() ,
+                  CSSClass: $('#StatusEditContainer #CSSClass').val() ,
+                  isDefault:($('#StatusEditContainer #isDefault').is(':checked')) ? "on" : ""
+	            };
+	            //call the server-side Controller/Action either via controllers or directly
+              //controllers['Status']['EditPost'](null, args);
+              StatusController.EditPost(args);
+	        };
+
+          //public
+				  return {
+              bindEvents : function() {
+                 $('#EditStatus').validate({
+                     submitHandler: function(form) {
+                         SubmittingStatusEditForm();
+                         return false;
+                     },
+                     rules: {
+                         StatusName: {required: false, maxlength:200},
+                         SortOrder: {required: false, digit: true},
+                         CSSClass: {required: false, maxlength:200},
+                         isDefault: {required: false, maxlength:1}
+                     },
+                     messages: {
+                         StatusName: "the field StatusName is not required,maxlength is 200",
+                         SortOrder: "the field SortOrder is not required,integer",
+                         CSSClass: "the field CSSClass is not required,maxlength is 200",
+                         isDefault: "the field isDefault is not required,check no more than 1 box"
+                     }
+                 });
+        
+              }
+				  }//end public members
+      })();  //end StatusEditModule
+
+
+      $(document).ready(function() {
+          StatusEditModule.bindEvents();
+      });      
+      
+</script>
+</div>{{/data}} 
+{{^data}}
+      Edit Status
+      expected a model:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}      
+    

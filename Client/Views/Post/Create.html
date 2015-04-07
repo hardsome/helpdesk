@@ -1,0 +1,133 @@
+
+
+      {{#data}}<div id='PostCreateContainer'>
+      <form id="CreatePost" method="post" role="form">
+      <div class="form-group">
+      <label for='Postid'>id</label>
+      <input id='Postid' name='Postid' type='hidden' value='{{id}}' />
+      </div>
+
+      
+        <div class="form-group">
+        <label for="PostName">PostName</label>
+        
+                  <input id='PostName' name='PostName' type='text' value='{{PostName}}' class='form-control' />
+                  <!--String-->
+                
+        </div>
+      
+        <div class="form-group">
+        <label for="IncidentID">IncidentID</label>
+        
+                    <select id='IncidentID' name='IncidentID' class='form-control'>
+                     <option value="">-- Select One --</option>
+                  {{#IncidentID}}<option value='{{IncidentID}}' selected> {{IncidentID}}</option>
+                  {{/IncidentID}}
+                    </select>
+                
+        </div>
+      
+        <div class="form-group">
+        <label for="FromUser">FromUser</label>
+        
+                    <select id='FromUser' name='FromUser' class='form-control'>
+                     <option value="">-- Select One --</option>
+                  {{#FromUser}}<option value='{{FromUser}}' selected> {{FromUser}}</option>
+                  {{/FromUser}}
+                    </select>
+                
+        </div>
+      
+        <div class="form-group">
+        <label for="ToUser">ToUser</label>
+        
+                    <select id='ToUser' name='ToUser' class='form-control'>
+                     <option value="">-- Select One --</option>
+                  {{#ToUser}}<option value='{{ToUser}}' selected> {{ToUser}}</option>
+                  {{/ToUser}}
+                    </select>
+                
+        </div>
+      
+        <div class="form-group">
+        <label for="PostedDate">PostedDate</label>
+        
+                  <input id='PostedDate' name='PostedDate' type='text' value='{{PostedDate}}' class='form-control' />
+                  <!--Date-->
+                
+        </div>
+      
+        <div class="form-group">
+        <label for="Desctiption">Desctiption</label>
+        
+                  <textarea id='Desctiption' name='Desctiption' cols='60' rows='15' class='form-control'>{{Desctiption}}</textarea>
+              
+        </div>
+      
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+
+        <script type="text/javascript">
+  PostCreateModule = (function() {
+		// private 
+	    var SubmittingPostCreateForm = function() {
+	        //alert("The form has been validated. Now send the form...");
+	        //make an AJAX call
+	        //e.preventDefault();
+	            var args = {id: $('#PostCreateContainer #Postid').val(),
+                  PostName: $('#PostCreateContainer #PostName').val() ,
+                  IncidentID: $('#PostCreateContainer #IncidentID').val() ,
+                  FromUser: $('#PostCreateContainer #FromUser').val() ,
+                  ToUser: $('#PostCreateContainer #ToUser').val() ,
+                  PostedDate: $('#PostCreateContainer #PostedDate').val() ,
+                  Desctiption: $('#PostCreateContainer #Desctiption').val() 
+	            };
+	        //call Controller/Action eaither via controllers or directly
+          //controllers['Post']['CreatePost'](null, args);
+          PostController.CreatePost(args);
+	    };
+
+		//public
+		return {
+			bindEvents : function() {
+           $('#CreatePost').validate({
+                submitHandler: function(form) {
+                   SubmittingPostCreateForm();
+                   return false;
+                },
+                rules: {
+                    PostName: {required: false, maxlength:200},
+                    IncidentID: {required: false},
+                    FromUser: {required: false},
+                    ToUser: {required: false},
+                    PostedDate: {required: false, maxlength:200},
+                    Desctiption: {required: false, maxlength:4000}
+                },
+                messages: {
+                    PostName: "the field PostName is not required,maxlength is 200",
+                    IncidentID: "the field IncidentID is not required,integer",
+                    FromUser: "the field FromUser is not required,integer",
+                    ToUser: "the field ToUser is not required,integer",
+                    PostedDate: "the field PostedDate is not required,maxlength is 200",
+                    Desctiption: "the field Desctiption is not required,maxlength is 4000"
+                }
+           });
+           
+             $(function() {  $( "#PostedDate" ).datepicker(); });
+           
+       }
+		}//end public members
+	})();  //end PostCreateModule
+
+
+	$(document).ready(function() {
+		PostCreateModule.bindEvents();
+	});
+</script>
+</div>{{/data}}      
+{{^data}}
+      Create Post
+      expected a model like:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}
+
+    

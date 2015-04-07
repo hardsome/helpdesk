@@ -1,0 +1,65 @@
+
+{{#data}}<div id='PriorityDeleteContainer' >
+      <p class='bg-danger'> Are you sure you want to delete this Priority? </p>
+      <form id="DeletePriority" method="post" role="form">
+      <div class="form-group">
+      <label for='Priorityid'>id</label>
+      {{id}}<input id='Priorityid' name='Priorityid' type='hidden' value='{{id}}' />
+      </div>
+
+
+      
+        <div class="form-group">
+        <label for="PriorityName">PriorityName</label>
+        <p id='PriorityName' class='form-control-static'> {{PriorityName}}<p>
+        </div>
+      
+        <div class="form-group">
+        <label for="CSSClass">CSSClass</label>
+        <p id='CSSClass' class='form-control-static'> {{CSSClass}}<p>
+        </div>
+      
+        <div class="form-group">
+        <label for="SortOrder">SortOrder</label>
+        <p id='SortOrder' class='form-control-static'> {{SortOrder}}<p>
+        </div>
+      
+        <button type="submit" class="btn btn-danger">Submit</button>
+      </form>
+
+      <script type="text/javascript">
+      $(document).ready();
+      
+  PriorityDeleteModule = (function() {
+		// private 
+      var SubmittingPriorityDeleteForm = function() {
+	        var args = {id: $('#PriorityDeleteContainer #Priorityid').val()};
+	        //make an AJAX call
+          //controllers['Priority']['DeletePost'](null, args);
+          PriorityController.DeletePost(args);
+	    }
+
+		//public
+		return {
+			bindEvents : function() {
+          $('#DeletePriority').submit(function( event ) {
+            //alert( "Handler for .submit() called." );
+            SubmittingPriorityDeleteForm();
+            event.preventDefault();
+            });
+      }
+		}//end public members
+	})();  //end PriorityDeleteModule
+
+
+	$(document).ready(function() {
+		PriorityDeleteModule.bindEvents();
+	});
+      
+</script>
+
+</div>{{/data}}
+{{^data}}
+      expected a model:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}      
+    

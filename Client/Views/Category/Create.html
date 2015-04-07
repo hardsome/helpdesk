@@ -1,0 +1,79 @@
+
+
+      {{#data}}<div id='CategoryCreateContainer'>
+      <form id="CreateCategory" method="post" role="form">
+      <div class="form-group">
+      <label for='Categoryid'>id</label>
+      <input id='Categoryid' name='Categoryid' type='hidden' value='{{id}}' />
+      </div>
+
+      
+        <div class="form-group">
+        <label for="CategoryName">CategoryName</label>
+        
+                  <input id='CategoryName' name='CategoryName' type='text' value='{{CategoryName}}' class='form-control' />
+                  <!--String-->
+                
+        </div>
+      
+        <div class="form-group">
+        <label for="SortOrder">SortOrder</label>
+        
+                  <input id='SortOrder' name='SortOrder' type='text' value='{{SortOrder}}' class='form-control' />
+                  <!--Integer-->
+                
+        </div>
+      
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+
+        <script type="text/javascript">
+  CategoryCreateModule = (function() {
+		// private 
+	    var SubmittingCategoryCreateForm = function() {
+	        //alert("The form has been validated. Now send the form...");
+	        //make an AJAX call
+	        //e.preventDefault();
+	            var args = {id: $('#CategoryCreateContainer #Categoryid').val(),
+                  CategoryName: $('#CategoryCreateContainer #CategoryName').val() ,
+                  SortOrder: $('#CategoryCreateContainer #SortOrder').val() 
+	            };
+	        //call Controller/Action eaither via controllers or directly
+          //controllers['Category']['CreatePost'](null, args);
+          CategoryController.CreatePost(args);
+	    };
+
+		//public
+		return {
+			bindEvents : function() {
+           $('#CreateCategory').validate({
+                submitHandler: function(form) {
+                   SubmittingCategoryCreateForm();
+                   return false;
+                },
+                rules: {
+                    CategoryName: {required: false, maxlength:200},
+                    SortOrder: {required: false, digit: true}
+                },
+                messages: {
+                    CategoryName: "the field CategoryName is not required,maxlength is 200",
+                    SortOrder: "the field SortOrder is not required,integer"
+                }
+           });
+           
+       }
+		}//end public members
+	})();  //end CategoryCreateModule
+
+
+	$(document).ready(function() {
+		CategoryCreateModule.bindEvents();
+	});
+</script>
+</div>{{/data}}      
+{{^data}}
+      Create Category
+      expected a model like:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}
+
+    

@@ -1,0 +1,41 @@
+
+      Read of Category
+      
+      <table id="Categorydatatable" class="table table-striped">
+        <thead>
+          
+          <td>
+            CategoryName
+          </td>
+          
+          <td>
+            SortOrder
+          </td>
+          
+          <td></td>
+        </thead>
+
+        <tbody>
+      {{^data}}
+       <tr>
+          <td colspan="4">No records</td>
+        </tr>
+      {{/data}}
+      {{#data}}
+        <tr rowid='{{id}}'>
+          
+          <td>
+            {{CategoryName}}
+          </td>
+          
+          <td>
+            {{SortOrder}}
+          </td>
+          
+          <td>
+      </td>
+        </tr>
+       {{/data}}
+        </tbody>
+      </table>
+    

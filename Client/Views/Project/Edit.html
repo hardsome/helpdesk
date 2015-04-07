@@ -1,0 +1,96 @@
+
+{{#data}}<div id='ProjectEditContainer'>
+      <form id="EditProject" method="post" role="form" >
+      <div class="form-group">
+      <label for='Projectid'>id</label>
+      {{id}}<input id='Projectid' name='Projectid' type='hidden' value='{{id}}' /> 
+      </div>
+
+      
+            <div class="form-group">
+            <label for="ProjectName">ProjectName</label>
+
+              
+                  <input id='ProjectName' name='ProjectName' type='text' class='form-control' value='{{ProjectName}}'  />
+                  <!--String-->
+                
+            </div>
+            
+            <div class="form-group">
+            <label for="POP3Address">POP3Address</label>
+
+              
+                  <input id='POP3Address' name='POP3Address' type='text' class='form-control' value='{{POP3Address}}'  />
+                  <!--String-->
+                
+            </div>
+            
+            <div class="form-group">
+            <label for="isActive">isActive</label>
+
+              
+                  {{#isActive}}
+                    <input type='checkbox' id='isActive' name='isActive'   checked  />
+                  {{/isActive}}
+                  {{^isActive}}
+                    <input type='checkbox' id='isActive' name='isActive'   />
+                  {{/isActive}}
+                
+            </div>
+            
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+
+        <script type="text/javascript">
+      
+			ProjectEditModule = (function() {
+				  // private 
+	        var SubmittingProjectEditForm = function() {
+	            //alert("The form has been validated. Now send the form...");
+	            //make an AJAX call
+	            var args = {id: $('#ProjectEditContainer #Projectid').val(),
+                  ProjectName: $('#ProjectEditContainer #ProjectName').val() ,
+                  POP3Address: $('#ProjectEditContainer #POP3Address').val() ,
+                  isActive:($('#ProjectEditContainer #isActive').is(':checked')) ? "on" : ""
+	            };
+	            //call the server-side Controller/Action either via controllers or directly
+              //controllers['Project']['EditPost'](null, args);
+              ProjectController.EditPost(args);
+	        };
+
+          //public
+				  return {
+              bindEvents : function() {
+                 $('#EditProject').validate({
+                     submitHandler: function(form) {
+                         SubmittingProjectEditForm();
+                         return false;
+                     },
+                     rules: {
+                         ProjectName: {required: false, maxlength:200},
+                         POP3Address: {required: false, maxlength:200},
+                         isActive: {required: false, maxlength:1}
+                     },
+                     messages: {
+                         ProjectName: "the field ProjectName is not required,maxlength is 200",
+                         POP3Address: "the field POP3Address is not required,maxlength is 200",
+                         isActive: "the field isActive is not required,check no more than 1 box"
+                     }
+                 });
+        
+              }
+				  }//end public members
+      })();  //end ProjectEditModule
+
+
+      $(document).ready(function() {
+          ProjectEditModule.bindEvents();
+      });      
+      
+</script>
+</div>{{/data}} 
+{{^data}}
+      Edit Project
+      expected a model:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}      
+    

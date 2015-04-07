@@ -1,0 +1,49 @@
+
+      Read of Priority
+      
+      <table id="Prioritydatatable" class="table table-striped">
+        <thead>
+          
+          <td>
+            PriorityName
+          </td>
+          
+          <td>
+            CSSClass
+          </td>
+          
+          <td>
+            SortOrder
+          </td>
+          
+          <td></td>
+        </thead>
+
+        <tbody>
+      {{^data}}
+       <tr>
+          <td colspan="4">No records</td>
+        </tr>
+      {{/data}}
+      {{#data}}
+        <tr rowid='{{id}}'>
+          
+          <td>
+            {{PriorityName}}
+          </td>
+          
+          <td>
+            {{CSSClass}}
+          </td>
+          
+          <td>
+            {{SortOrder}}
+          </td>
+          
+          <td>
+      </td>
+        </tr>
+       {{/data}}
+        </tbody>
+      </table>
+    

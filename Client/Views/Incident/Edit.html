@@ -1,0 +1,178 @@
+
+{{#data}}<div id='IncidentEditContainer'>
+      <form id="EditIncident" method="post" role="form" >
+      <div class="form-group">
+      <label for='Incidentid'>id</label>
+      {{id}}<input id='Incidentid' name='Incidentid' type='hidden' value='{{id}}' /> 
+      </div>
+
+      
+            <div class="form-group">
+            <label for="IncidentName">IncidentName</label>
+
+              
+                  <input id='IncidentName' name='IncidentName' type='text' class='form-control' value='{{IncidentName}}'  />
+                  <!--String-->
+                
+            </div>
+            
+            <div class="form-group">
+            <label for="ProjectID">ProjectID</label>
+
+              
+                    <select id='ProjectID' name='ProjectID' class='form-control'>
+                     <option value="">-- Select One --</option>
+                      {{#ProjectID}}<option value='{{ProjectID}}' selected> {{ProjectID}}</option>
+                      {{/ProjectID}}
+                    </select>
+                
+            </div>
+            
+            <div class="form-group">
+            <label for="StatusID">StatusID</label>
+
+              
+                    <select id='StatusID' name='StatusID' class='form-control'>
+                     <option value="">-- Select One --</option>
+                      {{#StatusID}}<option value='{{StatusID}}' selected> {{StatusID}}</option>
+                      {{/StatusID}}
+                    </select>
+                
+            </div>
+            
+            <div class="form-group">
+            <label for="PriorityID">PriorityID</label>
+
+              
+                    <select id='PriorityID' name='PriorityID' class='form-control'>
+                     <option value="">-- Select One --</option>
+                      {{#PriorityID}}<option value='{{PriorityID}}' selected> {{PriorityID}}</option>
+                      {{/PriorityID}}
+                    </select>
+                
+            </div>
+            
+            <div class="form-group">
+            <label for="CategoryID">CategoryID</label>
+
+              
+                    <select id='CategoryID' name='CategoryID' class='form-control'>
+                     <option value="">-- Select One --</option>
+                      {{#CategoryID}}<option value='{{CategoryID}}' selected> {{CategoryID}}</option>
+                      {{/CategoryID}}
+                    </select>
+                
+            </div>
+            
+            <div class="form-group">
+            <label for="Description">Description</label>
+
+              
+                  <textarea id='Description' name='Description' cols='60' rows='15' class='form-control'>{{Description}}</textarea>
+              
+            </div>
+            
+            <div class="form-group">
+            <label for="ReportedDate">ReportedDate</label>
+
+              
+                  <input id='ReportedDate' name='ReportedDate' type='text' class='form-control' value='{{ReportedDate}}'  />
+                  <!--Date-->
+                
+            </div>
+            
+            <div class="form-group">
+            <label for="UpdatedDate">UpdatedDate</label>
+
+              
+                  <input id='UpdatedDate' name='UpdatedDate' type='text' class='form-control' value='{{UpdatedDate}}'  />
+                  <!--Date-->
+                
+            </div>
+            
+            <div class="form-group">
+            <label for="UserID">UserID</label>
+
+              
+                    <select id='UserID' name='UserID' class='form-control'>
+                     <option value="">-- Select One --</option>
+                      {{#UserID}}<option value='{{UserID}}' selected> {{UserID}}</option>
+                      {{/UserID}}
+                    </select>
+                
+            </div>
+            
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+
+        <script type="text/javascript">
+      
+			IncidentEditModule = (function() {
+				  // private 
+	        var SubmittingIncidentEditForm = function() {
+	            //alert("The form has been validated. Now send the form...");
+	            //make an AJAX call
+	            var args = {id: $('#IncidentEditContainer #Incidentid').val(),
+                  IncidentName: $('#IncidentEditContainer #IncidentName').val() ,
+                  ProjectID: $('#IncidentEditContainer #ProjectID').val() ,
+                  StatusID: $('#IncidentEditContainer #StatusID').val() ,
+                  PriorityID: $('#IncidentEditContainer #PriorityID').val() ,
+                  CategoryID: $('#IncidentEditContainer #CategoryID').val() ,
+                  Description: $('#IncidentEditContainer #Description').val() ,
+                  ReportedDate: $('#IncidentEditContainer #ReportedDate').val() ,
+                  UpdatedDate: $('#IncidentEditContainer #UpdatedDate').val() ,
+                  UserID: $('#IncidentEditContainer #UserID').val() 
+	            };
+	            //call the server-side Controller/Action either via controllers or directly
+              //controllers['Incident']['EditPost'](null, args);
+              IncidentController.EditPost(args);
+	        };
+
+          //public
+				  return {
+              bindEvents : function() {
+                 $('#EditIncident').validate({
+                     submitHandler: function(form) {
+                         SubmittingIncidentEditForm();
+                         return false;
+                     },
+                     rules: {
+                         IncidentName: {required: false, maxlength:200},
+                         ProjectID: {required: false},
+                         StatusID: {required: false},
+                         PriorityID: {required: false},
+                         CategoryID: {required: false},
+                         Description: {required: false, maxlength:4000},
+                         ReportedDate: {required: false, maxlength:200},
+                         UpdatedDate: {required: false, maxlength:200},
+                         UserID: {required: false}
+                     },
+                     messages: {
+                         IncidentName: "the field IncidentName is not required,maxlength is 200",
+                         ProjectID: "the field ProjectID is not required,integer",
+                         StatusID: "the field StatusID is not required,integer",
+                         PriorityID: "the field PriorityID is not required,integer",
+                         CategoryID: "the field CategoryID is not required,integer",
+                         Description: "the field Description is not required,maxlength is 4000",
+                         ReportedDate: "the field ReportedDate is not required,maxlength is 200",
+                         UpdatedDate: "the field UpdatedDate is not required,maxlength is 200",
+                         UserID: "the field UserID is not required,integer"
+                     }
+                 });
+        $("#ReportedDate").datepicker();$("#UpdatedDate").datepicker();
+              }
+				  }//end public members
+      })();  //end IncidentEditModule
+
+
+      $(document).ready(function() {
+          IncidentEditModule.bindEvents();
+      });      
+      
+</script>
+</div>{{/data}} 
+{{^data}}
+      Edit Incident
+      expected a model:   {data:{object}/[list of objects], result: true/false, message: "message text" }; 
+{{/data}}      
+    
