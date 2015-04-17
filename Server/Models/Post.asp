@@ -145,10 +145,10 @@
               }
           },
 
-          // Select all Posts into a Array
+          // Select all Posts into an Array
           // return a Array of Post objects - if successful, null otherwise
           SelectAll : function (){
-              var records, objCommand
+              var records, objCommand;
               objCommand = Db.GetCommand(selectSQL);
               records = objCommand.Execute();
               if (records.eof){
@@ -168,10 +168,10 @@
               }
           },
 
-          // Select all Posts into a Array
+          // Select all Posts into an Array
           // return a Array of Post objects - if successful, null otherwise
           DropDown : function (){
-              var records, objCommand
+              var records, objCommand;
               objCommand = Db.GetCommand(selectSQL);
               records = objCommand.Execute();
               if (records.eof){
@@ -191,7 +191,7 @@
               }
           },
 
-          // Select all Posts into a Array
+          // Select all Posts into an Array
           // return a Array of Post objects - if successful, null otherwise
           SelectByField : function (fieldName, value){
               var strSQL, records,objCommand;
@@ -220,15 +220,15 @@
               }
           },
 
-          // Select all Posts into a Array
+          // Select all Posts into an Array
           // return a Array of Post objects - if successful, null otherwise
           SelectPage : function (page, nrecords, order){
-              var records, objCommand, strSQL
+              var records, objCommand, strSQL;
               var rStart = new String( 1+ ((page-1)*nrecords));
               var rEnd = new String (page*nrecords);
 
               strSQL = "WITH CTE AS (select *, row_number() over(order by " + order + ") as rn from [Post] )" +
-              "SELECT * FROM CTE WHERE rn Between " + rStart + " and " + rEnd
+              "SELECT * FROM CTE WHERE rn Between " + rStart + " and " + rEnd;
 
               objCommand = Db.GetCommand(strSQL);
               records = objCommand.Execute();
@@ -249,7 +249,7 @@
               }
           },
         
-          // Select all Posts into a Array
+          // Select all Posts into an Array
           // return a Array of Project objects - if successful, null otherwise
           Search : function (value){
               var records, objCommand, strSQL;
